@@ -1,0 +1,104 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+
+<!--&lt;!&ndash;-->
+<!--         Статус: Используются для установки вывода информации внутри самого log4j2,-->
+<!--         который не может быть установлен-->
+<!--         Когда набор для трассировки, вы увидите различные подробные выходы в пределах log4j2..-->
+<!--         MOLINITHINGERVAL: LOG4J автоматически обнаруживает профиль модификации и-->
+<!--         сам реконфигурацию, устанавливает количество интервалов.-->
+<!--&ndash;&gt;-->
+<!--<Configuration status="WARN" monitorInterval="600">-->
+
+<!--    <Properties>-->
+<!--        &lt;!&ndash;        <! - Настройка журнала выходного файла каталога ->&ndash;&gt;-->
+<!--        <Property name="LOG_HOME">${sys:catalina.home}/WebAppLogs/</Property>-->
+<!--    </Properties>-->
+
+<!--    <Appenders>-->
+
+<!--        &lt;!&ndash;        <! - Конфигурация этой выходной консоли ->&ndash;&gt;-->
+<!--        <Console name="Console" target="SYSTEM_OUT">-->
+<!--            &lt;!&ndash;            <! - Консоль только выводит уровень и вышеупомянутый-->
+<!--            уровень информации (Onmatch),другой прямой отторжение (OnMismatch) ->&ndash;&gt;-->
+<!--            &lt;!&ndash;            &lt;!&ndash; <ThresholdFilter level="trace" onMatch="ACCEPT"-->
+<!--            onMismatch="DENY"/>&ndash;&gt;&ndash;&gt;-->
+<!--            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="ACCEPT"/>-->
+<!--            &lt;!&ndash;            <! - формат журнала Выход ->&ndash;&gt;-->
+<!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>-->
+<!--        </Console>-->
+
+<!--        &lt;!&ndash;        <! - Установите формат журнала и настройте формат сжатия журнала-->
+<!--        (Service.log. Год .gz) ->&ndash;&gt;-->
+<!--        <RollingRandomAccessFile name="service_appender"-->
+<!--                                 fileName="${LOG_HOME}/service.log"-->
+<!--                                 filePattern="${LOG_HOME}/service.log.%d{yyyy-MM-dd}.log.gz">-->
+<!--            &lt;!&ndash;-->
+<!--                                 % D {ГГГГ-ММ-ДД ЧЧ: ММ: СС, SSS}: Бревно Время продукции-->
+<!--                                 % P: формат выхода журнала-->
+<!--                                 % С: Название регистратора-->
+<!--                                 % M: Содержание журнала, Logger.info («Сообщение»)-->
+<!--                                 % N: удаление-->
+<!--                                 % C: имя класса Java-->
+<!--                                 % L: вывод журнала-->
+<!--                                 % M: выход журнала-->
+<!--                                 Имя хоста: имя локальной машины-->
+<!--                                 Hostaddress: Локальный IP-адрес-->
+<!--             &ndash;&gt;-->
+<!--            <PatternLayout>-->
+<!--                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M &#45;&#45; %msg%xEx%n</pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+
+<!--                <TimeBasedTriggeringPolicy/>-->
+<!--                <SizeBasedTriggeringPolicy size="100 MB"/>-->
+<!--                &lt;!&ndash;  <TimeBasedTriggeringPolicy interval="1" modulate="true" /> &ndash;&gt;-->
+
+<!--            </Policies>-->
+<!--        </RollingRandomAccessFile>-->
+
+
+<!--        &lt;!&ndash;        <! - Формат журнала Debug ->&ndash;&gt;-->
+<!--        <RollingRandomAccessFile name="service_debug_appender"-->
+<!--                                 fileName="${LOG_HOME}/service.log"-->
+<!--                                 filePattern="${LOG_HOME}/service.log.%d{yyyy-MM-dd}.debug.gz">-->
+<!--            <PatternLayout>-->
+<!--                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M &#45;&#45; %msg%xEx%n</pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>-->
+<!--            </Policies>-->
+<!--        </RollingRandomAccessFile>-->
+<!--    </Appenders>-->
+
+<!--    <Loggers>-->
+<!--        &lt;!&ndash;        <! - Настройка корневого узла журнала ->&ndash;&gt;-->
+<!--        <root level="error">-->
+<!--            <appender-ref ref="Console"/>-->
+<!--            <appender-ref ref="service_appender" level="error"/>-->
+<!--        </root>-->
+
+<!--        &lt;!&ndash;        <! - Third Party Log System ->&ndash;&gt;-->
+<!--        <logger name="org.springframework.core" level="info"/>-->
+<!--        <logger name="org.springframework.beans" level="info"/>-->
+<!--        <logger name="org.springframework.context" level="info"/>-->
+<!--        <logger name="org.springframework.web" level="info"/>-->
+<!--        <logger name="org.jboss.netty" level="warn"/>-->
+<!--        <logger name="org.apache.http" level="warn"/>-->
+
+<!--        &lt;!&ndash;        <! - Экземпляр журнала (info), где "сервис-журнал" наследует root, но root вывод выводит консоль-->
+<!--        вывода журнала, а «сервисный журнал» использует вход в файл, с помощью добавки атрибута = «false» Сервис-журнал "&ndash;&gt;-->
+<!--        &lt;!&ndash;        Журнал больше не выводится на консоль ->&ndash;&gt;-->
+<!--        <logger name="service_info_log" level="info" includeLocation="true" additivity="true">-->
+<!--            <appender-ref ref="service_appender"/>-->
+<!--        </logger>-->
+
+<!--        &lt;!&ndash;        <! - Экземпляр журнала (Debug) ->&ndash;&gt;-->
+<!--        <logger name="service_debug_log" level="debug" includeLocation="true" additivity="true">-->
+<!--            <appender-ref ref="service_debug_appender"/>-->
+<!--        </logger>-->
+
+<!--    </Loggers>-->
+
+<!--</Configuration>-->
+
+
