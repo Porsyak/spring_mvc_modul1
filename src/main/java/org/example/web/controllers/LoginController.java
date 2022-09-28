@@ -14,30 +14,30 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Log4j2
 @Controller
-//@RequestMapping("/login")
+@RequestMapping("/login")
 public class LoginController {
-    //private final LoginService loginService;
+    private final LoginService loginService;
 
-//    @Autowired
-//    public LoginController(LoginService loginService) {
-//        this.loginService = loginService;
-//    }
-
-    //@RequestMapping(value = "/home", method = RequestMethod.GET)
-    @GetMapping("/login")
-    public ModelAndView home() {
-        log.info("GET /login return login_page");
-        //model.addAttribute("loginForm", new LoginForm());
-        return new ModelAndView("login_page");
+    @Autowired
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
     }
 
-//    @PostMapping("/auth")
-//    public String authenticate(LoginForm loginForm) {
-//        if (loginService.authenticate(loginForm)) {
-//            log.info("login OK redirect to book shelf");
-//            return "redirect:/books/shelf";
-//        }
-//        log.info("login FAIL redirect to book shelf, back to login");
-//        return "redirect:/login";
-//    }
+    @GetMapping
+    public String login(Model model) {
+        log.info("GET /login return login_page.html");
+        model.addAttribute("loginForm", new LoginForm());
+        return "login_page";
+    }
+
+    @PostMapping("/auth")
+    public String authenticate(LoginForm loginForm) {
+        if (loginService.authenticate(loginForm)) {
+            log.info("login OK redirect to book shelf");
+            return "redirect:/books/shelf";
+        } else {
+            log.info("login FAIL redirect to book shelf, back to login");
+            return "redirect:/login";
+        }
+    }
 }

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service;
 public class LoginService {
     public boolean authenticate(LoginForm loginForm){
         log.info("try auth with user-form: " + loginForm);
-        return loginForm.getUsername().equals("root") && loginForm.getPassword().equals("1234");
+        return loginForm.getUsername().equals("root") && loginForm.getPassword().equals("123");
     }
 }
