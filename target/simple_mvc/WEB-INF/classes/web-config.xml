@@ -50,5 +50,5 @@
         <property name="cacheable" value="true" />
     </bean>
 
-        <mvc:view-controller path="/books/shelf" view-name="book_shelf"/>
+<!--        <mvc:view-controller path="/books/shelf" view-name="book_shelf"/>-->
 </beans>
