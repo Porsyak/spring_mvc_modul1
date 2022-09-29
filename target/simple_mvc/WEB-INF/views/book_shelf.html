@@ -46,16 +46,29 @@
             </tr>
         </table>
     </form>
-    <table>
-        <tr>
-            <td>
-                <input type="text" placeholder="id number">
-            </td>
-            <td>
-                <input type="submit" value="remove">
-            </td>
-        </tr>
-    </table>
+    <form method="post" th:action="@{/books/remove}">
+        <table>
+            <tr>
+                <td>
+                    <input type="number" placeholder="id number" th:name="bookIdToRemove">
+                </td>
+                <td>
+                    <input type="submit" value="remove">
+                </td>
+            </tr>
+        </table>
+    </form>
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <input type="text" placeholder="id number">-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <input type="submit" value="remove">-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+
     <table id="books">
         <tr>
             <th>id</th>

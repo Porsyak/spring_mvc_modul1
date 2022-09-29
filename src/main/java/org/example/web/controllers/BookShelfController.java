@@ -6,10 +6,7 @@ import org.example.web.dto.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/books")
@@ -36,6 +33,16 @@ public class BookShelfController {
         bookService.saveBook(book);
         log.info("current repository size " + bookService.getAllBooks().size());
         return "redirect:/books/shelf";
+    }
+
+    @PostMapping("/remove")
+    public String removeBook(Integer bookIdToRemove){
+        if (bookService.removeBookById(bookIdToRemove)){
+            return "redirect:/books/shelf";
+        }
+        else {
+            return "book_shelf";
+        }
     }
 
 

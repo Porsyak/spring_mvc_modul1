@@ -25,4 +25,15 @@ public class BookRepository implements ProjectRepository<Book> {
         log.info("store new book" + book);
         repo.add(book);
     }
+
+    @Override
+    public boolean removeItemById(Integer bookIdToRemove) {
+        for (Book book : repo) {
+            if (book.getId().equals(bookIdToRemove)){
+            log.info("remove book completed " + book);
+            return repo.remove(book);
+             }
+        }
+        return false;
+    }
 }

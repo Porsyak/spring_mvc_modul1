@@ -1,3 +1,8 @@
 /Users/ivanporsak/IdeaProjects/Skillbox/simple_mvc/src/main/java/org/example/web/dto/LoginForm.java
+/Users/ivanporsak/IdeaProjects/Skillbox/simple_mvc/src/main/java/org/example/web/controllers/BookShelfController.java
 /Users/ivanporsak/IdeaProjects/Skillbox/simple_mvc/src/main/java/org/example/app/service/LoginService.java
+/Users/ivanporsak/IdeaProjects/Skillbox/simple_mvc/src/main/java/org/example/app/service/BookService.java
+/Users/ivanporsak/IdeaProjects/Skillbox/simple_mvc/src/main/java/org/example/app/service/ProjectRepository.java
+/Users/ivanporsak/IdeaProjects/Skillbox/simple_mvc/src/main/java/org/example/app/service/BookRepository.java
+/Users/ivanporsak/IdeaProjects/Skillbox/simple_mvc/src/main/java/org/example/web/dto/Book.java
 /Users/ivanporsak/IdeaProjects/Skillbox/simple_mvc/src/main/java/org/example/web/controllers/LoginController.java
