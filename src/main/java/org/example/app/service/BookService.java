@@ -21,11 +21,17 @@ public class BookService {
     }
 
     public void saveBook(Book book) {
-        bookRepo.store(book);
+        if (book.getTitle().trim().length() != 0 ||
+                book.getAuthor().trim().length() != 0){
+            bookRepo.store(book);}
     }
 
     public boolean removeBookById(Integer boorIdToRemove) {
         return bookRepo.removeItemById(boorIdToRemove);
+    }
+
+    public boolean removeByRegex(String queryRegex){
+        return bookRepo.removeByRegex(queryRegex);
     }
 
 }
