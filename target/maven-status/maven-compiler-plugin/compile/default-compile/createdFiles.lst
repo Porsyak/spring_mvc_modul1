@@ -1,8 +1,11 @@
-org/example/web/controllers/LoginController.class
-org/example/app/service/ProjectRepository.class
+org/example/web/config/WebContextConfig.class
 org/example/app/service/LoginService.class
 org/example/web/dto/LoginForm.class
 org/example/web/dto/Book.class
 org/example/app/service/BookService.class
 org/example/app/service/BookRepository.class
+org/example/web/controllers/LoginController.class
+org/example/app/service/ProjectRepository.class
+org/example/WebAppInitializer.class
+org/example/app/service/IdProvider.class
 org/example/web/controllers/BookShelfController.class

@@ -10,7 +10,7 @@ import lombok.extern.log4j.Log4j2;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Book {
-    private Integer id;
+    private String id;
     private String author;
     private String title;
     private Integer size;
