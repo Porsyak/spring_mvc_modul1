@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/books")
@@ -44,23 +47,26 @@ public class BookShelfController {
     }
 
     @PostMapping("/remove")
-    public String removeBook(BookIdToRemove bookIdToRemove) {
-        if (bookService.removeBookById(bookIdToRemove.getId())) {
-            return REDIRECT_BOOKS_SHELF;
+    public String removeBook(@Valid BookIdToRemove bookIdToRemove, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("book", new Book());
+            model.addAttribute("bookList", bookService.getAllBooks());
+            return "book_shelf";
         } else {
-            return BOOK_SHELF;
+            bookService.removeBookById(bookIdToRemove.getId());
+            return "redirect:/books/shelf";
         }
     }
-
     @PostMapping("/removeByRegex")
     public String removeByRegex(String queryRegex) {
         if (bookService.removeByRegex(queryRegex)) {
             return REDIRECT_BOOKS_SHELF;
         }
+        else {
         return BOOK_SHELF;
+        }
     }
-
-
 
 
 }

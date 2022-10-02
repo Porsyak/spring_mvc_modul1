@@ -46,30 +46,39 @@
             </tr>
         </table>
     </form>
-    <form method="post" th:action="@{/books/remove}">
+    <p></p>
+    <form method="post" th:action="@{/books/remove}" th:object="${bookIdToRemove}">
         <table>
             <tr>
                 <td>
-                    <input type="text" placeholder="id number" th:name="bookIdToRemove">
+                    <input type="text" placeholder="id number" th:field="*{id}">
                 </td>
                 <td>
                     <input type="submit" value="remove">
                 </td>
-            </tr>
-        </table>
-    </form>
-    <form method="post" th:action="@{/books/removeByRegex}">
-        <table>
-            <tr>
-                <td>
-                    <input type="text" placeholder="regex" th:name="queryRegex">
-                </td>
-                <td>
-                    <input type="submit" value="remove by regex">
+                <td th:if="${#fields.hasErrors()}">
+                    <p>Wrong id or not found</p>
                 </td>
             </tr>
         </table>
     </form>
+
+<!--    !!!!работает не корректно!!!!-->
+<!--    <p></p>-->
+<!--    <form method="post" th:action="@{/books/removeByRegex}">-->
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <td>-->
+<!--                    <input type="text" placeholder="regex" th:name="queryRegex">-->
+<!--                </td>-->
+<!--                <td>-->
+<!--                    <input type="submit" value="remove by regex">-->
+<!--                </td>-->
+
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </form>-->
+    <p></p>
     <table id="books">
         <tr>
             <th>id</th>

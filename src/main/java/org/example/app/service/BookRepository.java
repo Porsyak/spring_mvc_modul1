@@ -33,9 +33,11 @@ public class BookRepository implements ProjectRepository<Book>,
 
     @Override
     public boolean removeItemById(String bookIdToRemove) {
-        for (Book book : repo) {
-            log.info("remove book completed " + book);
-            if (repo.remove(book)) return true;
+        for (Book book : retrieveAll()) {
+            if (book.getId().equals(bookIdToRemove)) {
+                log.info("remove book completed: " + book);
+                return repo.remove(book);
+            }
         }
         return false;
     }
@@ -45,8 +47,8 @@ public class BookRepository implements ProjectRepository<Book>,
         for (Book book : repo) {
             if (book.getAuthor().contains(queryRegex) ||
                     book.getTitle().contains(queryRegex)) {
-                repo.remove(book);
-                return true;
+               return repo.remove(book);
+
             }
         }
         return false;

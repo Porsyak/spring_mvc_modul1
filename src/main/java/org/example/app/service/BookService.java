@@ -29,23 +29,12 @@ public class BookService {
         }
     }
 
-    public boolean removeBookById(String bookId) {
-        if (bookId == null || bookId.trim().length() == 0) {
-            return false;
-        } else {
-            bookRepo.removeItemById(bookId);
-            return true;
-        }
-
+    public boolean removeBookById(String bookIdToRemove) {
+        return bookRepo.removeItemById(bookIdToRemove);
     }
 
     public boolean removeByRegex(String query) {
-        if (query == null || query.trim().length() == 0) {
-            return false;
-        } else {
-            bookRepo.removeByRegex(query);
-            return true;
-        }
+        return bookRepo.removeByRegex(query);
     }
 
     private void defaultInit() {
