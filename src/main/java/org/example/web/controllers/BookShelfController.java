@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.example.app.exception.BookShelfLoginException;
 import org.example.app.service.BookService;
 import org.example.web.dto.Book;
+import org.example.web.dto.BookIdToRemove;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class BookShelfController {
     public String books(Model model) {
         log.info(this.toString());
         model.addAttribute("book", new Book());
+        model.addAttribute("bookIdToRemove", new BookIdToRemove());
         model.addAttribute("bookList", bookService.getAllBooks());
         return BOOK_SHELF;
     }
@@ -42,8 +44,8 @@ public class BookShelfController {
     }
 
     @PostMapping("/remove")
-    public String removeBook(@RequestParam(value = "bookIdToRemove") String bookIdToRemove) {
-        if (bookService.removeBookById(bookIdToRemove)) {
+    public String removeBook(BookIdToRemove bookIdToRemove) {
+        if (bookService.removeBookById(bookIdToRemove.getId())) {
             return REDIRECT_BOOKS_SHELF;
         } else {
             return BOOK_SHELF;
