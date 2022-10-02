@@ -1,6 +1,7 @@
 package org.example.web.controllers;
 
 import lombok.extern.log4j.Log4j2;
+import org.example.app.exception.BookShelfLoginException;
 import org.example.app.service.BookService;
 import org.example.web.dto.Book;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,8 @@ public class BookShelfController {
         }
         return BOOK_SHELF;
     }
+
+
 
 
 }
