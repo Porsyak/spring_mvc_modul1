@@ -18,6 +18,7 @@ public class BookShelfController {
     private final BookService bookService;
 
     private final String REDIRECT_BOOKS_SHELF = "redirect:/books/shelf";
+    private final String BOOK_SHELF = "book_shelf";
 
     @Autowired
     public BookShelfController(BookService bookService) {
@@ -25,33 +26,36 @@ public class BookShelfController {
     }
 
     @GetMapping("/shelf")
-    public String books(Model model){
+    public String books(Model model) {
         log.info(this.toString());
         model.addAttribute("book", new Book());
         model.addAttribute("bookList", bookService.getAllBooks());
-        return "book_shelf";
+        return BOOK_SHELF;
     }
 
     @PostMapping("/save")
-    public String saveBook(Book book){
+    public String saveBook(Book book) {
         bookService.saveBook(book);
         log.info("current repository size " + bookService.getAllBooks().size());
         return REDIRECT_BOOKS_SHELF;
     }
 
     @PostMapping("/remove")
-    public String removeBook(String bookIdToRemove){
-        bookService.removeBookById(bookIdToRemove);
+    public String removeBook(@RequestParam(value = "bookIdToRemove") String bookIdToRemove) {
+        if (bookService.removeBookById(bookIdToRemove)) {
             return REDIRECT_BOOKS_SHELF;
+        } else {
+            return BOOK_SHELF;
+        }
     }
 
     @PostMapping("/removeByRegex")
-    public String removeByRegex(String queryRegex){
-        bookService.removeByRegex(queryRegex);
-        return REDIRECT_BOOKS_SHELF;
+    public String removeByRegex(String queryRegex) {
+        if (bookService.removeByRegex(queryRegex)) {
+            return REDIRECT_BOOKS_SHELF;
+        }
+        return BOOK_SHELF;
     }
-
-
 
 
 }

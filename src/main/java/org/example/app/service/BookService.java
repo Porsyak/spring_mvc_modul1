@@ -24,16 +24,28 @@ public class BookService {
 
     public void saveBook(Book book) {
         if (book.getTitle().trim().length() != 0 ||
-                book.getAuthor().trim().length() != 0){
-            bookRepo.store(book);}
+                book.getAuthor().trim().length() != 0) {
+            bookRepo.store(book);
+        }
     }
 
-    public void removeBookById(String boorIdToRemove) {
-        bookRepo.removeItemById(boorIdToRemove);
+    public boolean removeBookById(String bookId) {
+        if (bookId == null || bookId.trim().length() == 0) {
+            return false;
+        } else {
+            bookRepo.removeItemById(bookId);
+            return true;
+        }
+
     }
 
-    public void removeByRegex(String queryRegex){
-        bookRepo.removeByRegex(queryRegex);
+    public boolean removeByRegex(String query) {
+        if (query == null || query.trim().length() == 0) {
+            return false;
+        } else {
+            bookRepo.removeByRegex(query);
+            return true;
+        }
     }
 
     private void defaultInit() {
@@ -43,11 +55,6 @@ public class BookService {
     private void defaultDestroy() {
         log.info("destroy INIT in BookService");
     }
-
-
-
-
-
 
 
 }
