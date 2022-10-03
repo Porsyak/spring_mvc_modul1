@@ -40,31 +40,38 @@ public class BookShelfController {
     }
 
     @PostMapping("/save")
-    public String saveBook(Book book) {
-        bookService.saveBook(book);
-        log.info("current repository size " + bookService.getAllBooks().size());
-        return REDIRECT_BOOKS_SHELF;
-    }
-
-    @PostMapping("/remove")
-    public String removeBook(@Valid BookIdToRemove bookIdToRemove, BindingResult bindingResult, Model model) {
-
+    public String saveBook(@Valid Book book, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("book", new Book());
+            model.addAttribute("book", book);
+            model.addAttribute("bookIdToRemove", new BookIdToRemove());
             model.addAttribute("bookList", bookService.getAllBooks());
             return "book_shelf";
         } else {
-            bookService.removeBookById(bookIdToRemove.getId());
+            bookService.saveBook(book);
+            log.info("current repository size: " + bookService.getAllBooks().size());
             return "redirect:/books/shelf";
         }
     }
+
+    @PostMapping("/remove")
+    public String removeBook(@Valid BookIdToRemove bookIdToRemove,
+                             BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("book", new Book());
+            model.addAttribute("bookList", bookService.getAllBooks());
+            return BOOK_SHELF;
+        } else {
+            bookService.removeBookById(bookIdToRemove.getId());
+            return REDIRECT_BOOKS_SHELF;
+        }
+    }
+
     @PostMapping("/removeByRegex")
     public String removeByRegex(String queryRegex) {
         if (bookService.removeByRegex(queryRegex)) {
             return REDIRECT_BOOKS_SHELF;
-        }
-        else {
-        return BOOK_SHELF;
+        } else {
+            return BOOK_SHELF;
         }
     }
 
