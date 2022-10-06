@@ -4,7 +4,6 @@ import lombok.*;
 import lombok.extern.log4j.Log4j2;
 
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotEmpty;
 
 @Log4j2
 @Getter
@@ -14,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class Book {
 
-    private String id;
+    private Integer id;
 
     private String author;
 
