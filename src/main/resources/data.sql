@@ -1,0 +1,1 @@
+INSERT INTO books(author,title) VALUES ('Dostoevsky','Idiot')
