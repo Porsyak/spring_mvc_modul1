@@ -80,6 +80,9 @@ public class BookShelfController {
 
     @PostMapping("/uploadFile")
     public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        if (file.isEmpty()){
+            return REDIRECT_BOOKS_SHELF;
+        }
         String name = file.getOriginalFilename();
         byte[] bytes = file.getBytes();
         String rootPath = System.getProperty("catalina.home");
