@@ -6,6 +6,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +18,6 @@ import java.util.List;
 @Log4j2
 public class BookRepository implements ProjectRepository<Book>, ApplicationContextAware {
 
-    //private final List<Book> repo = new ArrayList<>();
     private ApplicationContext context;
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -43,20 +43,21 @@ public class BookRepository implements ProjectRepository<Book>, ApplicationConte
 
     @Override
     public void store(Book book) {
-        // book.setId(context.getBean(IdProvider.class).providerId(book));
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("author", book.getAuthor());
+        parameterSource.addValue("title", book.getTitle());
+        jdbcTemplate.update(
+                "INSERT INTO books(author,title) VALUES (:author, :title)", parameterSource);
         log.info("store new book" + book);
-        //repo.add(book);
     }
 
     @Override
     public boolean removeItemById(Integer bookIdToRemove) {
-        for (Book book : retrieveAll()) {
-            if (book.getId().equals(bookIdToRemove)) {
-                log.info("remove book completed: " + book);
-                return true;//repo.remove(book);
-            }
-        }
-        return false;
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", bookIdToRemove);
+        jdbcTemplate.update("DELETE FROM books WHERE id = :id", parameterSource );
+                log.info("remove book completed: ");
+        return true;
     }
 
     @Override
