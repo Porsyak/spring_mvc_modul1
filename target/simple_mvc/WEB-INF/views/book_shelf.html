@@ -11,17 +11,21 @@
             top: 50%;
             transform: translate(-50%, -50%);
         }
-        #books{
+
+        #books {
             width: 50%;
             border-collapse: collapse;
         }
-        table{
+
+        table {
             margin: auto;
         }
-        th{
+
+        th {
             text-align: left;
         }
-        th,td{
+
+        th, td {
             border-bottom: 1px solid #ddd;
         }
     </style>
@@ -65,22 +69,32 @@
             </tr>
         </table>
     </form>
+    <form method="post" th:action="@{/books/uploadFile}" enctype="multipart/form-data">
+        <tr>
+            <td>
+                <input type="file" name="file">
+            </td>
+            <td>
+                <input type="submit" value="Upload">
+            </td>
+        </tr>
+    </form>
 
-<!--    !!!!работает не корректно!!!!-->
-<!--    <p></p>-->
-<!--    <form method="post" th:action="@{/books/removeByRegex}">-->
-<!--        <table>-->
-<!--            <tr>-->
-<!--                <td>-->
-<!--                    <input type="text" placeholder="regex" th:name="queryRegex">-->
-<!--                </td>-->
-<!--                <td>-->
-<!--                    <input type="submit" value="remove by regex">-->
-<!--                </td>-->
+    <!--    !!!!работает не корректно!!!!-->
+    <!--    <p></p>-->
+    <!--    <form method="post" th:action="@{/books/removeByRegex}">-->
+    <!--        <table>-->
+    <!--            <tr>-->
+    <!--                <td>-->
+    <!--                    <input type="text" placeholder="regex" th:name="queryRegex">-->
+    <!--                </td>-->
+    <!--                <td>-->
+    <!--                    <input type="submit" value="remove by regex">-->
+    <!--                </td>-->
 
-<!--            </tr>-->
-<!--        </table>-->
-<!--    </form>-->
+    <!--            </tr>-->
+    <!--        </table>-->
+    <!--    </form>-->
     <p></p>
     <table id="books">
         <tr>

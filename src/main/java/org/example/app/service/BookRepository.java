@@ -29,14 +29,14 @@ public class BookRepository implements ProjectRepository<Book>, ApplicationConte
 
     @Override
     public List<Book> retrieveAll() {
-        List<Book> books = jdbcTemplate.query("Select * from books", (ResultSet rs, int colum) ->{
+        List<Book> books = jdbcTemplate.query("Select * from books", (ResultSet rs, int colum) -> {
             Book book = new Book();
             book.setId(rs.getInt("id"));
             book.setAuthor(rs.getString("author"));
             book.setTitle(rs.getString("title"));
             //book.setSize(rs.getInt("size"));
             return book;
-        } );
+        });
 
         return new ArrayList<>(books);
     }
@@ -55,8 +55,8 @@ public class BookRepository implements ProjectRepository<Book>, ApplicationConte
     public boolean removeItemById(Integer bookIdToRemove) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", bookIdToRemove);
-        jdbcTemplate.update("DELETE FROM books WHERE id = :id", parameterSource );
-                log.info("remove book completed: ");
+        jdbcTemplate.update("DELETE FROM books WHERE id = :id", parameterSource);
+        log.info("remove book completed: ");
         return true;
     }
 
@@ -71,17 +71,6 @@ public class BookRepository implements ProjectRepository<Book>, ApplicationConte
 //        }
         throw new RuntimeException("Method don`t work");
     }
-
-//    @Override
-//    public boolean removeByRegex(Integer queryRegex) {
-//        for (Book book : repo) {
-//            if (book.getSize().equals(queryRegex)) {
-//                repo.remove(book);
-//            }
-//        }
-//
-//        return false;
-//    }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext)
